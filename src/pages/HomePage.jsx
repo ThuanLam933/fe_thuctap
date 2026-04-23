@@ -518,7 +518,10 @@ export default function HomePage() {
                       component="img"
                       src={c.img}
                       alt={c.title}
-                      onError={(e) => (e.currentTarget.src = "/images/quanxanh2.jpg")}
+                      onError={(e) =>
+  (e.currentTarget.src =
+    "https://res.cloudinary.com/dpmfojxl2/image/upload/f_auto,q_auto,w_1600/1_4_hovogb.jpg")
+}
                       sx={{
                         width: "100%",
                         height: "100%",

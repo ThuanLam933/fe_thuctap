@@ -15,7 +15,7 @@ import {
   Chip,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import ReviewProduct from "./ReviewProduct"; 
+import ReviewProduct from "./ReviewProduct"; 
 
 const API_BASE = "http://127.0.0.1:8000";
 const CART_KEY = "cart";
@@ -490,7 +490,7 @@ export default function ProductPage() {
             </Box>
             <Divider sx={{ my: 4 }} />
             {/* REVIEW SECTION - thêm đúng ở đây */}
-            {/* <ReviewProduct productId={product.id} /> */}
+            <ReviewProduct productId={product.id} />
 
             <Snackbar open={!!snack} autoHideDuration={2500} onClose={() => setSnack(null)}>
               {snack && <Alert severity={snack.severity}>{snack.message}</Alert>}

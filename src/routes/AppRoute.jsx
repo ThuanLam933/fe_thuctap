@@ -11,7 +11,7 @@ const MainLayout = lazy(() => import("../layouts/MainLayout"));
 const AccountPage = lazy(() => import("../pages/AccountPage"));
 const RegisterPage = lazy(() => import("../pages/RegisterPage"));
 const PaymentPage = lazy(() => import("../pages/PaymentPage"));
-// const VnpayReturnPage = lazy(() => import("../pages/VnpayReturnPage"));
+const VnpayReturnPage = lazy(() => import("../pages/VnpayReturnPage"));
 const ContactPage = lazy(() => import("../pages/ContactPage"));
 
 
@@ -45,7 +45,7 @@ export default function AppRoute() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/account" element={<AccountPage />} />
           <Route path="/payment" element={<PaymentPage />} />
-          {/* <Route path="/vnpay_return" element={<VnpayReturnPage />} /> */}
+          <Route path="/vnpay_return" element={<VnpayReturnPage />} />
           <Route path="/" element={<Navigate to="/trang-chu" replace />} />
         </Route>
 
