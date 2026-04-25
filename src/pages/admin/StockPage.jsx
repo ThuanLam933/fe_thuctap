@@ -30,7 +30,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SearchIcon from "@mui/icons-material/Search";
 
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = process.env.REACT_APP_API_BASE || "http://127.0.0.1:8000";
 const PAGE_SIZE = 12;
 
 export default function StockPage({ setSnack }) {

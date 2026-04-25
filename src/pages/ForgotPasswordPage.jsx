@@ -26,7 +26,7 @@ const theme = createTheme({
     shape: { borderRadius: 12 },
     typography: { fontFamily: "Roboto, sans-serif" },
 });
-
+const API_BASE = process.env.REACT_APP_API_BASE || "http://127.0.0.1:8000";
 
 export default function ForgotPasswordPage() {
     const [step, setStep] = useState(1);
@@ -44,7 +44,7 @@ export default function ForgotPasswordPage() {
         setError("");
         setMsg("");
         try{
-            await axios.post("http://127.0.0.1:8000/api/send-otp", { email });
+            await axios.post(`${API_BASE}/api/send-otp`, { email });
             setMsg("OTP đã được gửi đến email của bạn. Vui lòng kiểm tra.");
             setStep(2);
         }catch(err){
@@ -59,7 +59,7 @@ export default function ForgotPasswordPage() {
         setError("");
         setMsg("");
         try{
-            await axios.post("http://127.0.0.1:8000/api/reset-password", { email, otp, new_password: newPassword });
+            await axios.post(`${API_BASE}/api/reset-password`, { email, otp, new_password: newPassword });
             setMsg("Mật khẩu đã được đặt lại thành công. Bạn có thể đăng nhập với mật khẩu mới.");
             setTimeout(() => navigate("/login"), 3000);
         }catch(err){

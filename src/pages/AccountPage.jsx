@@ -62,7 +62,7 @@ function a11yProps(index) {
 }
 
 const getProductImage = (product, images) => {
-  const base = "http://127.0.0.1:8000/storage/";
+  const base = "https://api.blogcuavinh.id.vn/storage/";
 
   if (images && images[0] && images[0].full_url) return images[0].full_url;
 

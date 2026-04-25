@@ -13,7 +13,7 @@ import {
   Rating,
 } from "@mui/material";
 
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = process.env.REACT_APP_API_BASE || "https://api.blogcuavinh.id.vn";
 
 function getAuthHeaders() {
   // Tuỳ bạn lưu token thế nào (Sanctum Bearer token / JWT)
