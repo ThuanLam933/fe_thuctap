@@ -35,7 +35,7 @@ import StockPage from "./admin/StockPage";
 // import DiscountProductPage from "./admin/DiscountProductPage";
 // import DiscountPage from "./admin/DiscountPage";
 
-const API_BASE = process.env.REACT_APP_API_BASE || "http://127.0.0.1:8000";
+const API_BASE = process.env.REACT_APP_API_BASE || "https://api.blogcuavinh.id.vn";
 export { API_BASE };
 
 const theme = createTheme({
