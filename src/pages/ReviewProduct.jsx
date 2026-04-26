@@ -141,7 +141,7 @@ export default function ReviewProduct({ productId }) {
 
       setSnack({
         severity: "success",
-        message: json?.message || (isUpdate ? "Cập nhật thành công." : "sai."),
+        message: json?.message || (isUpdate ? "Cập nhật thành công." : "Gửi đánh giá thành công."),
       });
 
       // refresh list + myReview
