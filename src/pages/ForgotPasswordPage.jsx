@@ -26,7 +26,7 @@ const theme = createTheme({
     shape: { borderRadius: 12 },
     typography: { fontFamily: "Roboto, sans-serif" },
 });
-const API_BASE = process.env.REACT_APP_API_BASE || "http://127.0.0.1:8000";
+const API_BASE = process.env.REACT_APP_API_BASE || "https://api.blogcuavinh.id.vn";
 
 export default function ForgotPasswordPage() {
     const [step, setStep] = useState(1);

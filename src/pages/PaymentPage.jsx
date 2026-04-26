@@ -19,7 +19,7 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 
-const API_BASE = process.env.REACT_APP_API_BASE || "http://127.0.0.1:8000";
+const API_BASE = process.env.REACT_APP_API_BASE || "https://api.blogcuavinh.id.vn";
 
 const theme = createTheme({
   palette: {

@@ -23,7 +23,7 @@ import Alert from "@mui/material/Alert";
 import Avatar from "@mui/material/Avatar";
 import { useNavigate } from "react-router-dom";
 
-const API_BASE = process.env.REACT_APP_API_BASE || "http://127.0.0.1:8000";
+const API_BASE = process.env.REACT_APP_API_BASE || "https://api.blogcuavinh.id.vn";
 const STORAGE_KEY = "cart";
 
 const theme = createTheme({
