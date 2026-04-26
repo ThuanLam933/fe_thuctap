@@ -30,7 +30,7 @@ import OrdersPage from "./admin/OrdersPage";
 // import UsersPage from "./admin/UsersPage";
 // import ExchangePage from "./admin/ExchangePage";
 import StockPage from "./admin/StockPage";
-// import CommentsPage from "./admin/CommentsPage";
+import CommentsPage from "./admin/CommentsPage";
 // import ImageAdminPage from "./admin/ImageAdminPage";
 // import DiscountProductPage from "./admin/DiscountProductPage";
 // import DiscountPage from "./admin/DiscountPage";
@@ -158,10 +158,10 @@ export default function AdminPanel() {
             {page === "stock" && <StockPage setSnack={setSnack} />}
             {/* {page === "discountproduct" && (
               <DiscountProductPage setSnack={setSnack} />
-            )}
-            {page === "discount" && <DiscountPage setSnack={setSnack} />}
+            )} */}
+            {/* {page === "discount" && <DiscountPage setSnack={setSnack} />} */}
             {page === "comments" && <CommentsPage setSnack={setSnack} />}
-            {page === "images" && <ImageAdminPage setSnack={setSnack} />} */}
+            {/* {page === "images" && <ImageAdminPage setSnack={setSnack} />} */}
           </Container>
         </Box>
 
