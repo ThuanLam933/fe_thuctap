@@ -270,15 +270,18 @@ function DiscountDialog({ open, onClose, editing, refresh, setSnack }) {
       }
 
       const token = localStorage.getItem("access_token");
-
+      const formatDateTime = (dt) => {
+        if (!dt) return null;
+        return dt.replace("T", " ") + ":00"; // 👉 thêm seconds
+        };
       const payload = {
         ...form,
         value: Number(form.value),
         min_total: form.min_total === "" ? null : Number(form.min_total),
         usage_limit: form.usage_limit === "" ? null : Number(form.usage_limit),
         is_active: Number(form.is_active) ? 1 : 0,
-        start_at: form.start_at === "" ? null : form.start_at,
-        end_at: form.end_at === "" ? null : form.end_at,
+        start_at: formatDateTime(form.start_at),
+        end_at: formatDateTime(form.end_at),
       };
 
       const res = await fetch(
