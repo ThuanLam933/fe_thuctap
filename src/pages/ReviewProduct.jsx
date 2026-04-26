@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   Box,
   Typography,
@@ -41,8 +41,6 @@ export default function ReviewProduct({ productId }) {
   const [myReview, setMyReview] = useState(null);
   const isLoggedIn = !!localStorage.getItem("access_token");
 
-
-
   // Form state
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
@@ -69,7 +67,11 @@ export default function ReviewProduct({ productId }) {
     if (!isLoggedIn) return;
     try {
       const res = await fetch(`${API_BASE}/api/products/${productId}/my-review`, {
-        headers: { "Content-Type": "application/json", ...getAuthHeaders() },
+        headers: { 
+          "Content-Type": "application/json", 
+          "Accept": "application/json",
+          ...getAuthHeaders() 
+        },
       });
 
       // Nếu API không tồn tại hoặc 401 thì bỏ qua
@@ -117,6 +119,7 @@ export default function ReviewProduct({ productId }) {
         method,
         headers: {
           "Content-Type": "application/json",
+          "Accept": "application/json", // ĐÃ THÊM DÒNG NÀY ĐỂ BẮT LỖI 422
           ...getAuthHeaders(),
         },
         body: JSON.stringify({ rating, comment }),
@@ -126,15 +129,14 @@ export default function ReviewProduct({ productId }) {
         setSnack({ severity: "error", message: "Phiên đăng nhập hết hạn." });
         return;
       }
-      
 
       const json = await res.json().catch(() => ({}));
 
       if (!res.ok) {
-        // 409: đã review rồi
+        // Xử lý báo lỗi từ validation (422) hoặc các lỗi khác (409)
         setSnack({
           severity: "error",
-          message: json?.message || "Không thể gửi đánh giá.",
+          message: json?.message || "Không thể gửi đánh giá. Vui lòng kiểm tra lại.",
         });
         return;
       }
@@ -161,7 +163,10 @@ export default function ReviewProduct({ productId }) {
     try {
       const res = await fetch(`${API_BASE}/api/reviews/${myReview.id}`, {
         method: "DELETE",
-        headers: { ...getAuthHeaders() },
+        headers: { 
+          "Accept": "application/json",
+          ...getAuthHeaders() 
+        },
       });
 
       const json = await res.json().catch(() => ({}));

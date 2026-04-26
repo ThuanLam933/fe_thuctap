@@ -33,7 +33,7 @@ import StockPage from "./admin/StockPage";
 import CommentsPage from "./admin/CommentsPage";
 // import ImageAdminPage from "./admin/ImageAdminPage";
 // import DiscountProductPage from "./admin/DiscountProductPage";
-// import DiscountPage from "./admin/DiscountPage";
+import DiscountPage from "./admin/DiscountPage";
 
 const API_BASE = process.env.REACT_APP_API_BASE || "https://api.blogcuavinh.id.vn";
 export { API_BASE };
@@ -60,7 +60,7 @@ const SIDEBAR_ITEMS = [
   // { key: "exchanges", title: "Phiếu trả" },
   { key: "stock", title: "Phiếu nhập" },
   // { key: "discountproduct", title: "Sản phẩm giảm giá" },
-  // { key: "discount", title: "Mã giảm giá đơn hàng" },
+  { key: "discount", title: "Mã giảm giá đơn hàng" },
   { key: "comments", title: "Comments" },
   { key: "images", title: "Image Manager" },
 ];
@@ -159,7 +159,7 @@ export default function AdminPanel() {
             {/* {page === "discountproduct" && (
               <DiscountProductPage setSnack={setSnack} />
             )} */}
-            {/* {page === "discount" && <DiscountPage setSnack={setSnack} />} */}
+            {page === "discount" && <DiscountPage setSnack={setSnack} />}
             {page === "comments" && <CommentsPage setSnack={setSnack} />}
             {/* {page === "images" && <ImageAdminPage setSnack={setSnack} />} */}
           </Container>

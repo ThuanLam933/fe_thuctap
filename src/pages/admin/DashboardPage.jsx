@@ -84,7 +84,7 @@ export default function DashboardPage({ setSnack }) {
                 fetch(`${API_BASE}/api/colors`),
                 fetch(`${API_BASE}/api/sizes`),
 
-                fetchWithAuth(`${API_BASE}/api/exchanges`),
+                
                 fetchWithAuth(`${API_BASE}/api/admin/suppliers`),
                 fetchWithAuth(`${API_BASE}/api/admin/inventory/logs`),
                 fetchWithAuth(`${API_BASE}/api/admin/receipts`),
@@ -309,7 +309,7 @@ export default function DashboardPage({ setSnack }) {
                 categories: catCount,
                 colors: colorCount,
                 sizes: sizeCount,
-                exchanges: retCount,
+                
                 suppliers: supCount,
                 inventoryLogs: invCount,
                 receipts: recCount,
@@ -339,7 +339,7 @@ export default function DashboardPage({ setSnack }) {
         { key: "categories", title: "Loại sản phẩm", color: "#96CEB4" },
         { key: "colors", title: "Màu sắc", color: "#FDCB6E" },
         { key: "sizes", title: "Kích cỡ", color: "#DDA0DD" },
-        // { key: "exchanges", title: "Phiếu trả hàng", color: "#FF7675" },
+        
         { key: "suppliers", title: "Nhà cung cấp", color: "#74B9FF" },
         { key: "receipts", title: "Phiếu nhập kho", color: "#A29BFE" },
         
