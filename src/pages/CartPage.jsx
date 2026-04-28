@@ -582,7 +582,32 @@ export default function CartPage() {
 
   const formatVND = (n) => (typeof n === "number" ? n.toLocaleString("vi-VN") + "₫" : "—");
   
-
+  if (loading) {
+  return (
+    <Box
+      sx={{
+        position: "fixed",
+        inset: 0,
+        backgroundColor: "#fff",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 9999,
+      }}
+    >
+      <Box
+        sx={{
+          width: 40,
+          height: 40,
+          border: "4px solid #ddd",
+          borderTop: "4px solid #1976d2",
+          borderRadius: "50%",
+          animation: "spin 1s linear infinite",
+        }}
+      />
+    </Box>
+  );
+}
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ minHeight: "100vh", backgroundColor: "background.default", pb: 6 }}>
