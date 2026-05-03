@@ -43,13 +43,19 @@ export default function ForgotPasswordPage() {
         setLoading(true);
         setError("");
         setMsg("");
-        try{
-            await axios.post(`${API_BASE}/api/send-otp`, { email });
-            setMsg("OTP đã được gửi đến email của bạn. Vui lòng kiểm tra.");
-            setStep(2);
-        }catch(err){
-            setError("Không thể gửi OTP. Vui lòng thử lại.");
-        }finally{
+        try {
+                const res = await axios.post(`${API_BASE}/api/send-otp`, { email });
+
+                if (res.data.status) {
+                    setMsg(res.data.message);
+                    setStep(2);
+                } else {
+                    setError(res.data.message);
+                }
+
+            } catch (err) {
+                setError(err.response?.data?.message || "Lỗi server");
+            }finally{
             setLoading(false);
         }
     };
