@@ -58,7 +58,7 @@ export default function HomePage() {
   const [loadingCategories, setLoadingCategories] = useState(false);
   const [error, setError] = useState(null);
   const [snack, setSnack] = useState(null);
-
+  const [loadingRatings, setLoadingRatings] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [sortBy, setSortBy] = useState("default");
 
@@ -84,53 +84,48 @@ export default function HomePage() {
 
 
   const fetchRatingsForProducts = useCallback(async (productList) => {
-    try {
-      
-      const need = (productList || []).filter((p) => p?.id && !ratingMap[p.id]);
+  setLoadingRatings(true);
+  try {
+    const need = (productList || []).filter((p) => p?.id && !ratingMap[p.id]);
+    if (need.length === 0) return;
 
-      if (need.length === 0) return;
-
-      
-      const CONCURRENCY = 6;
-      const chunks = [];
-      for (let i = 0; i < need.length; i += CONCURRENCY) {
-        chunks.push(need.slice(i, i + CONCURRENCY));
-      }
-
-      const nextMap = {};
-
-      for (const chunk of chunks) {
-        const results = await Promise.all(
-          chunk.map(async (p) => {
-            const url = `${API_BASE}/api/products/${p.id}/reviews?page=1&per_page=1`;
-            const res = await fetch(url);
-            if (!res.ok) return null;
-
-            const json = await res.json().catch(() => null);
-            if (!json) return null;
-            const meta = json.meta || {};
-            const avg =
-              Number(meta.avg_rating ?? json.avg_rating ?? json.data?.avg_rating ?? 0) || 0;
-
-            const count =
-              Number(meta.review_count ?? meta.total ?? json.review_count ?? json.total ?? 0) || 0;
-
-            return { id: p.id, avg, count };
-          })
-        );
-
-        results.filter(Boolean).forEach((r) => {
-          nextMap[r.id] = { avg: r.avg, count: r.count };
-        });
-      }
-
-      if (Object.keys(nextMap).length > 0) {
-        setRatingMap((prev) => ({ ...prev, ...nextMap }));
-      }
-    } catch (e) {
-      console.warn("fetchRatingsForProducts error:", e);
+    const CONCURRENCY = 6;
+    const chunks = [];
+    for (let i = 0; i < need.length; i += CONCURRENCY) {
+      chunks.push(need.slice(i, i + CONCURRENCY));
     }
-  }, [ratingMap]);
+
+    const nextMap = {};
+
+    for (const chunk of chunks) {
+      const results = await Promise.all(
+        chunk.map(async (p) => {
+          const res = await fetch(`${API_BASE}/api/products/${p.id}/reviews?page=1&per_page=1`);
+          if (!res.ok) return null;
+
+          const json = await res.json().catch(() => null);
+          if (!json) return null;
+
+          return {
+            id: p.id,
+            avg: Number(json.meta?.avg_rating ?? 0),
+            count: Number(json.meta?.review_count ?? 0),
+          };
+        })
+      );
+
+      results.filter(Boolean).forEach((r) => {
+        nextMap[r.id] = r;
+      });
+    }
+
+    setRatingMap((prev) => ({ ...prev, ...nextMap }));
+  } catch (e) {
+    console.warn(e);
+  } finally {
+    setLoadingRatings(false);
+  }
+}, [ratingMap]);
 
   const fetchMinVariantsInStock = useCallback(async (productList) => {
     try {
@@ -632,7 +627,7 @@ export default function HomePage() {
           </Box>
 
            {/* LIST SAN PHAM - CO DINH 4 COT */}
-            {loadingProducts ? (
+            {loadingProducts || loadingRatings ? (
               <Box sx={{ display: "flex", justifyContent: "center", py: 6 }}>
                 <CircularProgress />
               </Box>
