@@ -72,7 +72,7 @@ export default function DashboardPage({ setSnack }) {
                 catRes,
                 colorRes,
                 sizeRes,
-                retRes, 
+                
                 supRes, 
                 invRes, 
                 recRes, 
@@ -92,7 +92,7 @@ export default function DashboardPage({ setSnack }) {
                 ]);
 
 
-            const [p, o, u, cat, color, size, ret, sup, inv, rec] =
+            const [p, o, u, cat, color, size,  sup, inv, rec] =
                 await Promise.all([
                     pRes.ok ? pRes.json().catch(() => []) : [],
                     oRes.ok ? oRes.json().catch(() => []) : [],
@@ -100,7 +100,7 @@ export default function DashboardPage({ setSnack }) {
                     catRes.ok ? catRes.json().catch(() => []) : [],
                     colorRes.ok ? colorRes.json().catch(() => []) : [],
                     sizeRes.ok ? sizeRes.json().catch(() => []) : [],
-                    retRes.ok ? retRes.json().catch(() => []) : [],
+                    
                     supRes.ok ? supRes.json().catch(() => []) : [],
                     invRes.ok ? invRes.json().catch(() => []) : [],
                     recRes.ok ? recRes.json().catch(() => []) : [],
@@ -133,7 +133,7 @@ export default function DashboardPage({ setSnack }) {
             const catCount = normalizeCount(cat);
             const colorCount = normalizeCount(color);
             const sizeCount = normalizeCount(size);
-            const retCount = normalizeCount(ret);
+            
             const supCount = normalizeCount(sup);
             const invCount = normalizeCount(inv);
             const recCount = normalizeCount(rec);
