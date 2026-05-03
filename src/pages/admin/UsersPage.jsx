@@ -29,7 +29,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-
+const API_BASE = process.env.REACT_APP_API_BASE || "https://api.blogcuavinh.id.vn";
 const PAGE_SIZE = 12;
 
 export default function UsersPage({ setSnack }) {
@@ -59,7 +59,7 @@ export default function UsersPage({ setSnack }) {
         setLoading(true);
         try {
             const token = getStoredToken();
-            const res = await fetch("http://127.0.0.1:8000/api/admin/users", {
+            const res = await fetch(`${API_BASE}/api/admin/users`, {
                 method: "GET",
                 headers: {
                     Accept: "application/json",
