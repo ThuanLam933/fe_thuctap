@@ -40,6 +40,12 @@ export default function RegisterPage() {
     const validate = () => {
     const newErrors = {};
     if (!name.trim()) newErrors.name = "Vui lòng nhập tên";
+    if(name.length >50) {
+      newErrors.name = "Tên không được vượt quá 50 ký tự";
+    }
+    if(!/^[a-zA-Z\s]+$/.test(name)){
+      newErrors.name = "Tên không được chứa ký tự đặc biệt";
+    }
     if (!email.trim()) {
         newErrors.email = "Vui lòng nhập email";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {

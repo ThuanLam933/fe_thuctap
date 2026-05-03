@@ -73,20 +73,9 @@ export default function LoginPage() {
 };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!email){
-      setEmailError("Vui lòng nhập email");
-      return;
-    }
-    if (!isValidEmail(email)) {
-      setEmailError("Email không đúng định dạng");
-      return;
-    }
-    if(!password){
-      setPasswordError("Vui lòng nhập mật khẩu");
-      return;
-    }
-    setEmailError("");
-    setPasswordError("");
+    
+    
+    if (!validate())return;
     setLoading(true);
     setError("");
     try {
@@ -120,6 +109,30 @@ export default function LoginPage() {
       setLoading(false);
     }
   };
+  const validate = () => {
+  let valid = true;
+
+  setEmailError("");
+  setPasswordError("");
+
+  if (!email) {
+    setEmailError("Vui lòng nhập email");
+    valid = false;
+  } else if (!isValidEmail(email)) {
+    setEmailError("Email không đúng định dạng");
+    valid = false;
+  }
+
+  if (!password) {
+    setPasswordError("Vui lòng nhập mật khẩu");
+    valid = false;
+  } else if (password.length < 6) {
+    setPasswordError("Mật khẩu tối thiểu 6 ký tự");
+    valid = false;
+  }
+
+  return valid;
+};
 
   return (
     <ThemeProvider theme={theme}>
