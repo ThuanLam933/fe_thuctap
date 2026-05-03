@@ -27,7 +27,7 @@ import ColorsPage from "./admin/ColorsPage";
 import SizesPage from "./admin/SizesPage";
 import InventoryPage from "./admin/InventoryPage";
 import OrdersPage from "./admin/OrdersPage";
-// import UsersPage from "./admin/UsersPage";
+import UsersPage from "./admin/UsersPage";
 // import ExchangePage from "./admin/ExchangePage";
 import StockPage from "./admin/StockPage";
 import CommentsPage from "./admin/CommentsPage";
@@ -153,7 +153,7 @@ export default function AdminPanel() {
             {page === "inventory" && <InventoryPage setSnack={setSnack} />}
             {page === "variants" && <VariantPage setSnack={setSnack} />}
             {page === "orders" && <OrdersPage setSnack={setSnack} />}
-            {/* {page === "users" && <UsersPage setSnack={setSnack} />} */}
+            {page === "users" && <UsersPage setSnack={setSnack} />}
             {/* {page === "exchanges" && <ExchangePage setSnack={setSnack} />} */}
             {page === "stock" && <StockPage setSnack={setSnack} />}
             {/* {page === "discountproduct" && (
