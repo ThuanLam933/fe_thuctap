@@ -51,7 +51,7 @@ export default function CartPage() {
 
   const [variantsMap, setVariantsMap] = useState({});
   const [productStatusMap, setProductStatusMap] = useState({});
-
+  const [loadingBE, setLoadingBE] = useState(true);
   const [discountCode, setDiscountCode] = useState("");
   const [discount, setDiscount] = useState(null);
   const [applyingDiscount, setApplyingDiscount] = useState(false);
@@ -181,11 +181,15 @@ export default function CartPage() {
 
   useEffect(() => {
     const productIds = Array.from(new Set(items.map((it) => it.product_id).filter(Boolean)));
-    if (!productIds.length) return;
-
+    if (!productIds.length){
+      setLoadingBE(false);
+    
+       return;
+    }
     let cancelled = false;
 
     const fetchVariantsAndStatus = async () => {
+      setLoadingBE(true);
       try {
         const results = await Promise.all(
           productIds.map(async (pid) => {
@@ -248,6 +252,8 @@ export default function CartPage() {
         });
       } catch (e) {
         console.warn("Load variants/status for cart failed", e);
+      }finally{
+        if (!cancelled) setLoadingBE(false);
       }
     };
 
@@ -581,8 +587,8 @@ export default function CartPage() {
   };
 
   const formatVND = (n) => (typeof n === "number" ? n.toLocaleString("vi-VN") + "₫" : "—");
-  
-  if (loading) {
+  const isLoading = loading || loadingBE;
+  if (isLoading) {
   return (
     <Box
       sx={{
@@ -596,15 +602,21 @@ export default function CartPage() {
       }}
     >
       <Box
-        sx={{
-          width: 40,
-          height: 40,
-          border: "4px solid #ddd",
-          borderTop: "4px solid #1976d2",
-          borderRadius: "50%",
-          animation: "spin 1s linear infinite",
-        }}
-      />
+  sx={{
+    width: 40,
+    height: 40,
+    border: "4px solid #ddd",
+    borderTop: "4px solid #1976d2",
+    borderRadius: "50%",
+    animation: "spin 1s linear infinite",
+
+    // 👇 THÊM ĐOẠN NÀY
+    "@keyframes spin": {
+      from: { transform: "rotate(0deg)" },
+      to: { transform: "rotate(360deg)" },
+    },
+  }}
+/>
     </Box>
   );
 }
@@ -649,7 +661,7 @@ export default function CartPage() {
               </Box>
 
               <Paper elevation={0} sx={{ border: "1px solid #e0e0e0", boxShadow: "none" }}>
-                {loading ? (
+                {isLoading ? (
                   <Box sx={{ py: 6, display: "flex", justifyContent: "center" }}>
                     <Typography>Đang tải...</Typography>
                   </Box>
